@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
  * @LastEditors: reiner850593913 lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 23:09:56
+ * @LastEditTime: 2023-02-22 23:11:54
  */
 class PerformanceCalculator {
   performance: any;
@@ -44,15 +44,25 @@ class PerformanceCalculator {
 }
 
 function createPerformanceCalculator(aPerformance, aPlay) {
-  switch(aPlay.type){
-    case "tragedy": return new TragedyCalculator(aPerformance,aPlay)
-    case 'comedy': return new ComedyCalculator(aPerformance,aPlay)
+  switch (aPlay.type) {
+    case "tragedy":
+      return new TragedyCalculator(aPerformance, aPlay);
+    case "comedy":
+      return new ComedyCalculator(aPerformance, aPlay);
     default:
-      throw new Error(`unkown type: ${aPlay.type}`)
+      throw new Error(`unkown type: ${aPlay.type}`);
   }
 }
 
-class TragedyCalculator extends PerformanceCalculator {}
+class TragedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 40000;
+    if (this.performance.audience > 30) {
+      result += 1000 * (this.performance.audience - 30);
+    }
+    return result;
+  }
+}
 class ComedyCalculator extends PerformanceCalculator {}
 
 export function createStatementData(invoice, plays) {
