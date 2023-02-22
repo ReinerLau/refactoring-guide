@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
  * @LastEditors: reiner850593913 lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 22:53:29
+ * @LastEditTime: 2023-02-22 22:56:20
  */
 class PerformanceCalculator {
   performance: any;
@@ -51,7 +51,7 @@ export function createStatementData(invoice, plays) {
     );
     const result = Object.assign({}, aPerformance);
     result.play = calculator.play;
-    result.amount = amountFor(result);
+    result.amount = calculator.amount;
     result.volumeCredits = volumeCreditsFor(result);
     return result;
   }
