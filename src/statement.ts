@@ -2,15 +2,21 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 16:27:43
+ * @LastEditTime: 2023-02-22 16:36:57
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export function statement(invoice, plays) {
-  const statementData:any = {};
-  statementData.customer = invoice.customer
-  statementData.performances = invoice.performances
+  const statementData: any = {};
+  statementData.customer = invoice.customer;
+  statementData.performances = invoice.performances.map(enrichPerformance);
   return renderPlainText(statementData, plays);
+
+  // 浅拷贝，目的是尽量不修改函数传进来的参数
+  function enrichPerformance(aPerformance) {
+    const result = Object.assign({}, aPerformance);
+    return result;
+  }
 }
 
 function renderPlainText(data: any, plays: any) {
