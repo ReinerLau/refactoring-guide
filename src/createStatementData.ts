@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
  * @LastEditors: reiner850593913 lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 23:17:00
+ * @LastEditTime: 2023-02-22 23:20:44
  */
 class PerformanceCalculator {
   performance: any;
@@ -10,24 +10,6 @@ class PerformanceCalculator {
   constructor(aPerformance, play) {
     this.performance = aPerformance;
     this.play = play;
-  }
-
-  get amount() {
-    let result = 0;
-    switch (this.play.type) {
-      case "tragedy":
-        throw "bad thing";
-      case "comedy":
-        result = 30000;
-        if (this.performance.audience > 20) {
-          result += 10000 + 500 * (this.performance.audience - 20);
-        }
-        result += 300 * this.performance.audience;
-        break;
-      default:
-        throw new Error(`unknown type: ${this.play.type}`);
-    }
-    return result;
   }
 
   get volumeCredits() {
@@ -95,18 +77,6 @@ export function createStatementData(invoice, plays) {
     return plays[aPerformance.playID];
   }
 
-  function amountFor(aPerformance: any) {
-    return new PerformanceCalculator(aPerformance, playFor(aPerformance))
-      .amount;
-  }
-
-  function volumeCreditsFor(aPerformance: any) {
-    let result = 0;
-    result += Math.max(aPerformance.audience - 30, 0);
-    if ("comedy" === aPerformance.play.type)
-      result += Math.floor(aPerformance.audience / 5);
-    return result;
-  }
   function totalAmount(data) {
     return data.performances.reduce((total, p) => total + p.amount, 0);
   }
