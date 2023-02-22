@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
  * @LastEditors: reiner850593913 lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 23:15:16
+ * @LastEditTime: 2023-02-22 23:17:00
  */
 class PerformanceCalculator {
   performance: any;
@@ -16,7 +16,7 @@ class PerformanceCalculator {
     let result = 0;
     switch (this.play.type) {
       case "tragedy":
-        throw 'bad thing'
+        throw "bad thing";
       case "comedy":
         result = 30000;
         if (this.performance.audience > 20) {
@@ -59,7 +59,16 @@ class TragedyCalculator extends PerformanceCalculator {
     return result;
   }
 }
-class ComedyCalculator extends PerformanceCalculator {}
+class ComedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 30000;
+    if (this.performance.audience > 20) {
+      result += 10000 + 500 * (this.performance.audience - 20);
+    }
+    result += 300 * this.performance.audience;
+    return result;
+  }
+}
 
 export function createStatementData(invoice, plays) {
   const statementData: any = {};
