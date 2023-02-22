@@ -2,20 +2,21 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 16:25:22
+ * @LastEditTime: 2023-02-22 16:27:43
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export function statement(invoice, plays) {
   const statementData:any = {};
   statementData.customer = invoice.customer
-  return renderPlainText(statementData, invoice, plays);
+  statementData.performances = invoice.performances
+  return renderPlainText(statementData, plays);
 }
 
-function renderPlainText(data: any, invoice: any, plays: any) {
+function renderPlainText(data: any, plays: any) {
   let result = `Statement for ${data.customer}\n`;
 
-  for (let pref of invoice.performances) {
+  for (let pref of data.performances) {
     result += `${playFor(pref).name}: ${usd(amountFor(pref))} (${
       pref.audience
     } seats)\n`;
@@ -26,7 +27,7 @@ function renderPlainText(data: any, invoice: any, plays: any) {
 
   function totalAmount() {
     let result = 0;
-    for (let pref of invoice.performances) {
+    for (let pref of data.performances) {
       result += amountFor(pref);
     }
     return result;
@@ -34,7 +35,7 @@ function renderPlainText(data: any, invoice: any, plays: any) {
 
   function totalVolumeCredits() {
     let volumeCredits = 0;
-    for (let pref of invoice.performances) {
+    for (let pref of data.performances) {
       volumeCredits += volumeCreditsFor(pref);
     }
     return volumeCredits;
