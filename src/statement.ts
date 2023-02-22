@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 15:46:20
+ * @LastEditTime: 2023-02-22 15:52:20
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -17,9 +17,7 @@ export function statement(invoice, plays) {
   }).format;
 
   for (let pref of invoice.performances) {
-    volumeCredits += Math.max(pref.audience - 30, 0);
-    if ("comedy" === playFor(pref).type)
-      volumeCredits += Math.floor(pref.audience / 5);
+    volumeCredits += volumeCreditsFor(pref);
 
     result += `${playFor(pref).name}: ${format(amountFor(pref) / 100)} (${
       pref.audience
@@ -29,6 +27,14 @@ export function statement(invoice, plays) {
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
+
+  function volumeCreditsFor(pref: any) {
+    let volumeCredits = 0
+    volumeCredits += Math.max(pref.audience - 30, 0);
+    if ("comedy" === playFor(pref).type)
+      volumeCredits += Math.floor(pref.audience / 5);
+    return volumeCredits
+  }
 
   // 以查询取代临时变量
   function playFor(aPerformance: any) {
