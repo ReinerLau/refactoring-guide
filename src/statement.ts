@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 16:36:57
+ * @LastEditTime: 2023-02-22 16:43:20
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -15,7 +15,12 @@ export function statement(invoice, plays) {
   // 浅拷贝，目的是尽量不修改函数传进来的参数
   function enrichPerformance(aPerformance) {
     const result = Object.assign({}, aPerformance);
+    result.play = playFor(aPerformance)
     return result;
+  }
+  // 以查询取代临时变量
+  function playFor(aPerformance: any) {
+    return plays[aPerformance.playID];
   }
 }
 
@@ -23,7 +28,7 @@ function renderPlainText(data: any, plays: any) {
   let result = `Statement for ${data.customer}\n`;
 
   for (let pref of data.performances) {
-    result += `${playFor(pref).name}: ${usd(amountFor(pref))} (${
+    result += `${pref.play.name}: ${usd(amountFor(pref))} (${
       pref.audience
     } seats)\n`;
   }
@@ -58,15 +63,11 @@ function renderPlainText(data: any, plays: any) {
   function volumeCreditsFor(pref: any) {
     let result = 0;
     result += Math.max(pref.audience - 30, 0);
-    if ("comedy" === playFor(pref).type)
+    if ("comedy" === pref.play.type)
       result += Math.floor(pref.audience / 5);
     return result;
   }
 
-  // 以查询取代临时变量
-  function playFor(aPerformance: any) {
-    return plays[aPerformance.playID];
-  }
 
   // 提炼函数，
   // pref、play 是不会被修改的变量作为参数传递
@@ -74,7 +75,7 @@ function renderPlainText(data: any, plays: any) {
   function amountFor(aPerformance: any) {
     // 在里面初始化就在里面初始化
     let result = 0;
-    switch (playFor(aPerformance).type) {
+    switch (aPerformance.play.type) {
       case "tragedy":
         result = 40000;
         if (aPerformance.audience > 30) {
@@ -89,7 +90,7 @@ function renderPlainText(data: any, plays: any) {
         result += 300 * aPerformance.audience;
         break;
       default:
-        throw new Error(`unknown type: ${playFor(aPerformance).type}`);
+        throw new Error(`unknown type: ${aPerformance.play.type}`);
     }
     // thisAmount 是被修改的变量作为函数的结果返回
     // 永远将函数的返回值命名为 result"
