@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
  * @LastEditors: reiner850593913 lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 23:04:55
+ * @LastEditTime: 2023-02-22 23:09:56
  */
 class PerformanceCalculator {
   performance: any;
@@ -43,6 +43,18 @@ class PerformanceCalculator {
   }
 }
 
+function createPerformanceCalculator(aPerformance, aPlay) {
+  switch(aPlay.type){
+    case "tragedy": return new TragedyCalculator(aPerformance,aPlay)
+    case 'comedy': return new ComedyCalculator(aPerformance,aPlay)
+    default:
+      throw new Error(`unkown type: ${aPlay.type}`)
+  }
+}
+
+class TragedyCalculator extends PerformanceCalculator {}
+class ComedyCalculator extends PerformanceCalculator {}
+
 export function createStatementData(invoice, plays) {
   const statementData: any = {};
   statementData.customer = invoice.customer;
@@ -62,10 +74,6 @@ export function createStatementData(invoice, plays) {
     result.amount = calculator.amount;
     result.volumeCredits = calculator.volumeCredits;
     return result;
-  }
-
-  function createPerformanceCalculator(aPerformance,aPlay){
-    return new PerformanceCalculator(aPerformance,aPlay)
   }
 
   function playFor(aPerformance: any) {
