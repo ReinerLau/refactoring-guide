@@ -2,14 +2,36 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
  * @LastEditors: reiner850593913 lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 22:45:42
+ * @LastEditTime: 2023-02-22 22:53:29
  */
 class PerformanceCalculator {
-  performances: any;
+  performance: any;
   play: any;
-  constructor(aPerformance,play) {
-    this.performances = aPerformance;
-    this.play = play
+  constructor(aPerformance, play) {
+    this.performance = aPerformance;
+    this.play = play;
+  }
+
+  get amount() {
+    let result = 0;
+    switch (this.play.type) {
+      case "tragedy":
+        result = 40000;
+        if (this.performance.audience > 30) {
+          result += 1000 * (this.performance.audience - 30);
+        }
+        break;
+      case "comedy":
+        result = 30000;
+        if (this.performance.audience > 20) {
+          result += 10000 + 500 * (this.performance.audience - 20);
+        }
+        result += 300 * this.performance.audience;
+        break;
+      default:
+        throw new Error(`unknown type: ${this.play.type}`);
+    }
+    return result;
   }
 }
 
@@ -23,7 +45,10 @@ export function createStatementData(invoice, plays) {
   return statementData;
   // 浅拷贝，目的是尽量不修改函数传进来的参数
   function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance));
+    const calculator = new PerformanceCalculator(
+      aPerformance,
+      playFor(aPerformance)
+    );
     const result = Object.assign({}, aPerformance);
     result.play = calculator.play;
     result.amount = amountFor(result);
@@ -36,25 +61,8 @@ export function createStatementData(invoice, plays) {
   }
 
   function amountFor(aPerformance: any) {
-    let result = 0;
-    switch (aPerformance.play.type) {
-      case "tragedy":
-        result = 40000;
-        if (aPerformance.audience > 30) {
-          result += 1000 * (aPerformance.audience - 30);
-        }
-        break;
-      case "comedy":
-        result = 30000;
-        if (aPerformance.audience > 20) {
-          result += 10000 + 500 * (aPerformance.audience - 20);
-        }
-        result += 300 * aPerformance.audience;
-        break;
-      default:
-        throw new Error(`unknown type: ${aPerformance.play.type}`);
-    }
-    return result;
+    return new PerformanceCalculator(aPerformance, playFor(aPerformance))
+      .amount;
   }
 
   function volumeCreditsFor(aPerformance: any) {
