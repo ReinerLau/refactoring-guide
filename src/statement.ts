@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 16:51:08
+ * @LastEditTime: 2023-02-22 16:54:23
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,6 +10,8 @@ export function statement(invoice, plays) {
   const statementData: any = {};
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
+  statementData.totalAmount = totalAmount(statementData);
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData);
   return renderPlainText(statementData, plays);
 
   // 浅拷贝，目的是尽量不修改函数传进来的参数
@@ -54,6 +56,21 @@ export function statement(invoice, plays) {
       result += Math.floor(aPerformance.audience / 5);
     return result;
   }
+  function totalAmount(data) {
+    let result = 0;
+    for (let pref of data.performances) {
+      result += pref.amount;
+    }
+    return result;
+  }
+
+  function totalVolumeCredits(data) {
+    let volumeCredits = 0;
+    for (let pref of data.performances) {
+      volumeCredits += pref.volumeCredits;
+    }
+    return volumeCredits;
+  }
 }
 
 function renderPlainText(data: any, plays: any) {
@@ -64,25 +81,9 @@ function renderPlainText(data: any, plays: any) {
       pref.audience
     } seats)\n`;
   }
-  result += `Amount owed is ${usd(totalAmount())}\n`;
-  result += `You earned ${totalVolumeCredits()} credits\n`;
+  result += `Amount owed is ${usd(data.totalAmount)}\n`;
+  result += `You earned ${data.totalVolumeCredits} credits\n`;
   return result;
-
-  function totalAmount() {
-    let result = 0;
-    for (let pref of data.performances) {
-      result += pref.amount;
-    }
-    return result;
-  }
-
-  function totalVolumeCredits() {
-    let volumeCredits = 0;
-    for (let pref of data.performances) {
-      volumeCredits += pref.volumeCredits;
-    }
-    return volumeCredits;
-  }
 
   function usd(aNumber: number) {
     return new Intl.NumberFormat("en-Us", {
