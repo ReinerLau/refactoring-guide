@@ -1,18 +1,27 @@
 /*
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
- * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 17:11:57
+ * @LastEditors: reiner850593913 lk850593913@gmail.com
+ * @LastEditTime: 2023-02-22 22:43:48
  */
+class PerformanceCalculator {
+  performances: any;
+  constructor(aPerformance) {
+    this.performances = aPerformance;
+  }
+}
+
 export function createStatementData(invoice, plays) {
   const statementData: any = {};
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
   statementData.totalAmount = totalAmount(statementData);
   statementData.totalVolumeCredits = totalVolumeCredits(statementData);
+
   return statementData;
   // 浅拷贝，目的是尽量不修改函数传进来的参数
   function enrichPerformance(aPerformance) {
+    const calculator = new PerformanceCalculator(aPerformance);
     const result = Object.assign({}, aPerformance);
     result.play = playFor(result);
     result.amount = amountFor(result);
