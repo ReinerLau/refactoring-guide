@@ -2,17 +2,18 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 16:22:44
+ * @LastEditTime: 2023-02-22 16:25:22
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export function statement(invoice, plays) {
-  const statementData = {};
+  const statementData:any = {};
+  statementData.customer = invoice.customer
   return renderPlainText(statementData, invoice, plays);
 }
 
 function renderPlainText(data: any, invoice: any, plays: any) {
-  let result = `Statement for ${invoice.customer}\n`;
+  let result = `Statement for ${data.customer}\n`;
 
   for (let pref of invoice.performances) {
     result += `${playFor(pref).name}: ${usd(amountFor(pref))} (${
