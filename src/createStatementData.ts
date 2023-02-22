@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
  * @LastEditors: reiner850593913 lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 23:11:54
+ * @LastEditTime: 2023-02-22 23:15:16
  */
 class PerformanceCalculator {
   performance: any;
@@ -16,11 +16,7 @@ class PerformanceCalculator {
     let result = 0;
     switch (this.play.type) {
       case "tragedy":
-        result = 40000;
-        if (this.performance.audience > 30) {
-          result += 1000 * (this.performance.audience - 30);
-        }
-        break;
+        throw 'bad thing'
       case "comedy":
         result = 30000;
         if (this.performance.audience > 20) {
