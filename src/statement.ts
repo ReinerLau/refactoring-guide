@@ -2,17 +2,19 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 16:13:16
+ * @LastEditTime: 2023-02-22 16:20:14
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export function statement(invoice, plays) {
+  return renderPlainText(invoice, plays);
+}
+
+function renderPlainText(invoice: any, plays: any) {
   let result = `Statement for ${invoice.customer}\n`;
 
   for (let pref of invoice.performances) {
-    result += `${playFor(pref).name}: ${usd(amountFor(pref))} (${
-      pref.audience
-    } seats)\n`;
+    result += `${playFor(pref).name}: ${usd(amountFor(pref))} (${pref.audience} seats)\n`;
   }
   result += `Amount owed is ${usd(totalAmount())}\n`;
   result += `You earned ${totalVolumeCredits()} credits\n`;
@@ -34,7 +36,7 @@ export function statement(invoice, plays) {
     return volumeCredits;
   }
 
-  function usd(aNumber) {
+  function usd(aNumber: number) {
     return new Intl.NumberFormat("en-Us", {
       style: "currency",
       currency: "USD",
@@ -83,3 +85,4 @@ export function statement(invoice, plays) {
     return result;
   }
 }
+
