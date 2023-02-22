@@ -19,11 +19,11 @@ export function statement(invoice, plays) {
   return result;
 
   function totalAmount() {
-    let totalAmount = 0;
+    let result = 0;
     for (let pref of invoice.performances) {
-      totalAmount += amountFor(pref);
+      result += amountFor(pref);
     }
-    return totalAmount;
+    return result;
   }
 
   function totalVolumeCredits() {
