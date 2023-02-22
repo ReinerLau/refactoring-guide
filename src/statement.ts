@@ -17,7 +17,7 @@ export function statement(invoice, plays) {
     const result = Object.assign({}, aPerformance);
     result.play = playFor(result);
     result.amount = amountFor(result);
-    result.volumeCredits = volumeCreditsFor(result)
+    result.volumeCredits = volumeCreditsFor(result);
     return result;
   }
 
@@ -47,10 +47,11 @@ export function statement(invoice, plays) {
     return result;
   }
 
-  function volumeCreditsFor(pref: any) {
+  function volumeCreditsFor(aPerformance: any) {
     let result = 0;
-    result += Math.max(pref.audience - 30, 0);
-    if ("comedy" === pref.play.type) result += Math.floor(pref.audience / 5);
+    result += Math.max(aPerformance.audience - 30, 0);
+    if ("comedy" === aPerformance.play.type)
+      result += Math.floor(aPerformance.audience / 5);
     return result;
   }
 }
@@ -90,5 +91,4 @@ function renderPlainText(data: any, plays: any) {
       minimumFractionDigits: 2,
     }).format(aNumber / 100);
   }
-
 }
