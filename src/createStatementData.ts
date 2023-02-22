@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 17:11:31
  * @LastEditors: reiner850593913 lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 22:57:52
+ * @LastEditTime: 2023-02-22 23:04:55
  */
 class PerformanceCalculator {
   performance: any;
@@ -53,7 +53,7 @@ export function createStatementData(invoice, plays) {
   return statementData;
   // 浅拷贝，目的是尽量不修改函数传进来的参数
   function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(
+    const calculator = createPerformanceCalculator(
       aPerformance,
       playFor(aPerformance)
     );
@@ -62,6 +62,10 @@ export function createStatementData(invoice, plays) {
     result.amount = calculator.amount;
     result.volumeCredits = calculator.volumeCredits;
     return result;
+  }
+
+  function createPerformanceCalculator(aPerformance,aPlay){
+    return new PerformanceCalculator(aPerformance,aPlay)
   }
 
   function playFor(aPerformance: any) {
