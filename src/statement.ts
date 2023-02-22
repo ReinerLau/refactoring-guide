@@ -7,7 +7,6 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export function statement(invoice, plays) {
-  let totalAmount = 0;
   let result = `Statement for ${invoice.customer}\n`;
 
   for (let pref of invoice.performances) {
@@ -15,6 +14,7 @@ export function statement(invoice, plays) {
       pref.audience
     } seats)\n`;
   }
+  let totalAmount = 0;
   for (let pref of invoice.performances) {
     totalAmount += amountFor(pref);
   }
@@ -35,7 +35,7 @@ export function statement(invoice, plays) {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 2,
-    }).format(aNumber/100);
+    }).format(aNumber / 100);
   }
 
   function volumeCreditsFor(pref: any) {
