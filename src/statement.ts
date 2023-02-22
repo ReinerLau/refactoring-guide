@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 16:07:27
+ * @LastEditTime: 2023-02-22 16:10:15
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -14,6 +14,8 @@ export function statement(invoice, plays) {
     result += `${playFor(pref).name}: ${usd(amountFor(pref))} (${
       pref.audience
     } seats)\n`;
+  }
+  for (let pref of invoice.performances) {
     totalAmount += amountFor(pref);
   }
   result += `Amount owed is ${usd(totalAmount)}\n`;
