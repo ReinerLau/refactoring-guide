@@ -2,7 +2,7 @@
  * @Author: ReinerLau lk850593913@gmail.com
  * @Date: 2023-02-22 13:45:34
  * @LastEditors: ReinerLau lk850593913@gmail.com
- * @LastEditTime: 2023-02-22 15:52:20
+ * @LastEditTime: 2023-02-22 15:53:38
  * @FilePath: \refactoring-guide\src\statement.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -29,11 +29,11 @@ export function statement(invoice, plays) {
   return result;
 
   function volumeCreditsFor(pref: any) {
-    let volumeCredits = 0
-    volumeCredits += Math.max(pref.audience - 30, 0);
+    let result = 0
+    result += Math.max(pref.audience - 30, 0);
     if ("comedy" === playFor(pref).type)
-      volumeCredits += Math.floor(pref.audience / 5);
-    return volumeCredits
+      result += Math.floor(pref.audience / 5);
+    return result
   }
 
   // 以查询取代临时变量
