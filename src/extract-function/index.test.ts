@@ -1,11 +1,12 @@
-import { expect, it, vi } from "vitest";
-import { printOwing } from ".";
+import { describe, expect, it, vi } from "vitest";
+import { noLocalVariables } from ".";
 
-it("extract-function", () => {
-  const log = vi.spyOn(console, "log");
+describe("提炼函数", () => {
+  it("无局部变量", () => {
+    const log = vi.spyOn(console, "log");
 
-  printOwing();
+    noLocalVariables();
 
-  expect(log).toHaveBeenCalledWith(`name: test`);
-  expect(log).toHaveBeenCalledWith(`amount: 0`);
+    expect(log).toHaveBeenCalledWith("test");
+  });
 });

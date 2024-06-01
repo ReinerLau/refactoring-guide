@@ -1,18 +1,7 @@
-export const printOwing = () => {
-  printBanner();
-  let outstanding = calculateOutstanding();
-  printDetails(outstanding);
+export const noLocalVariables = () => {
+  print();
 
-  function printDetails(outstanding) {
-    console.log(`name: ${invoice.customer}`);
-    console.log(`amount: ${outstanding}`);
+  function print() {
+    console.log("test");
   }
 };
-
-const invoice = {
-  customer: "test",
-};
-
-const printBanner = () => {};
-
-const calculateOutstanding = () => 0;
