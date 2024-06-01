@@ -1,10 +1,12 @@
 export const printOwing = () => {
   printBanner();
   let outstanding = calculateOutstanding();
+  printDetails(outstanding);
 
-  // print details
-  console.log(`name: ${invoice.customer}`);
-  console.log(`amount: ${outstanding}`);
+  function printDetails(outstanding) {
+    console.log(`name: ${invoice.customer}`);
+    console.log(`amount: ${outstanding}`);
+  }
 };
 
 const invoice = {
