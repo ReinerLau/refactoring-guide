@@ -33,3 +33,17 @@ const printName = (name: string) => {
 const changeDataName = (data) => {
   data.name = "test1";
 };
+
+export const changeLocalVariables = () => {
+  const count = changeCount();
+
+  console.log(count);
+
+  return count;
+};
+
+const changeCount = () => {
+  let result = 0;
+  result++;
+  return result;
+};

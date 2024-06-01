@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { noLocalVariables, withLocalVariables } from ".";
+import { changeLocalVariables, noLocalVariables, withLocalVariables } from ".";
 
 describe("提炼函数", () => {
   it("无局部变量", () => {
@@ -25,5 +25,11 @@ describe("提炼函数", () => {
 
       expect(data.name).toBe("test1");
     });
+  });
+
+  it("对局部变量再赋值", () => {
+    const count = changeLocalVariables();
+
+    expect(count).toBe(1);
   });
 });
