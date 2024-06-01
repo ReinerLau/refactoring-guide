@@ -11,11 +11,19 @@ describe("提炼函数", () => {
     expect(log).toHaveBeenCalledWith("reiner");
   });
 
-  it("有局部变量", () => {
-    const log = vi.spyOn(console, "log");
+  describe("有局部变量", () => {
+    it("只是读取局部变量", () => {
+      const log = vi.spyOn(console, "log");
 
-    withLocalVariables();
+      withLocalVariables();
 
-    expect(log).toHaveBeenCalledWith("reiner");
+      expect(log).toHaveBeenCalledWith("reiner");
+    });
+
+    it("局部变量是数据结构同时对其修改", () => {
+      const data = withLocalVariables();
+
+      expect(data.name).toBe("test1");
+    });
   });
 });
