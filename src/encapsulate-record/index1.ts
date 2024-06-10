@@ -28,7 +28,7 @@ const customerData = {
   },
 };
 
-getRawDataOfCustomers()[customerID].usages[year][month] = amount;
+setUsage(customerID, year, month, amount);
 
 function compareUsage(customerID, laterYear, month) {
   const later = getRawDataOfCustomers()[customerID].usages[laterYear][month];
@@ -45,4 +45,8 @@ function getRawDataOfCustomers() {
 }
 function setRawDataOfCustomers(arg) {
   customerData = new CustomerData(arg);
+}
+
+function setUsage(customerID, year, month, amount) {
+  getRawDataOfCustomers()[customerID].usages[year][month] = amount;
 }
