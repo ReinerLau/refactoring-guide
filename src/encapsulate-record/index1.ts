@@ -1,3 +1,9 @@
+class CustomerData {
+  constructor(data) {
+    this._data = data;
+  }
+}
+
 const customerData = {
   "1920": {
     name: "martin",
@@ -31,9 +37,12 @@ function compareUsage(customerID, laterYear, month) {
   return { laterAmount: later, change: later - earlier };
 }
 
-function getRawDataOfCustomers() {
+function getCustomerData() {
   return customerData;
 }
+function getRawDataOfCustomers() {
+  return customerData._data;
+}
 function setRawDataOfCustomers(arg) {
-  customerData = arg;
+  customerData = new CustomerData(arg);
 }
