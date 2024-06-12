@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
-import { printOwing } from ".";
+import { printOwing } from "./after";
+// import { printOwing } from "./before";
 
-describe("提炼函数-after", () => {
+describe("提炼函数-有局部变量", () => {
   it("print banner", () => {
     const spy = vi.spyOn(console, "log");
     const invoice = {
