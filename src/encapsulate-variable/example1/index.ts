@@ -1,4 +1,4 @@
-import { getDefaultOwner, setDefaultOwner } from "./defaultOwner";
+import { defaultOwner, setDefaultOwner } from "./defaultOwner";
 
 export const spaceship = {
   owner: {
@@ -7,6 +7,6 @@ export const spaceship = {
   },
 };
 
-spaceship.owner = getDefaultOwner();
+spaceship.owner = defaultOwner();
 
 setDefaultOwner({ firstName: "Rebecca", lastName: "Parsons" });

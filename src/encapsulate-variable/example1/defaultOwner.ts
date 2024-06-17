@@ -1,9 +1,9 @@
-let defaultOwner = { firstName: "Martic", lastName: "Fowler" };
+let defaultOwnerData = { firstName: "Martic", lastName: "Fowler" };
 
-export function getDefaultOwner() {
-  return defaultOwner;
+export function defaultOwner() {
+  return defaultOwnerData;
 }
 
 export function setDefaultOwner(arg) {
-  defaultOwner = arg;
+  defaultOwnerData = arg;
 }
