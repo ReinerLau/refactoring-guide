@@ -1,7 +1,7 @@
 let defaultOwnerData = { firstName: "Martic", lastName: "Fowler" };
 
 export function defaultOwner() {
-  return defaultOwnerData;
+  return Object.assign({}, defaultOwnerData);
 }
 
 export function setDefaultOwner(arg) {
