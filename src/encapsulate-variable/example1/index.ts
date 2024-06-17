@@ -1,4 +1,4 @@
-export let defaultOwner = { firstName: "Martic", lastName: "Fowler" };
+import { getDefaultOwner, setDefaultOwner } from "./defaultOwner";
 
 export const spaceship = {
   owner: {
@@ -10,11 +10,3 @@ export const spaceship = {
 spaceship.owner = getDefaultOwner();
 
 setDefaultOwner({ firstName: "Rebecca", lastName: "Parsons" });
-
-function getDefaultOwner() {
-  return defaultOwner;
-}
-
-function setDefaultOwner(arg) {
-  defaultOwner = arg;
-}

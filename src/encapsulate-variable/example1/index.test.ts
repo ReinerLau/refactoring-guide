@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { defaultOwner, spaceship } from ".";
+import { spaceship } from ".";
+import { getDefaultOwner } from "./defaultOwner";
 describe("封装变量-范例", () => {
   it("读取", () => {
     expect(spaceship.owner).toEqual({
@@ -9,7 +10,7 @@ describe("封装变量-范例", () => {
   });
 
   it("更新", () => {
-    expect(defaultOwner).toEqual({
+    expect(getDefaultOwner()).toEqual({
       firstName: "Rebecca",
       lastName: "Parsons",
     });
