@@ -1,1 +1,3 @@
-export const cpyNm = "Acme Gooseberries";
+export const companyName = "Acme Gooseberries";
+
+export const cpyNm = companyName;
