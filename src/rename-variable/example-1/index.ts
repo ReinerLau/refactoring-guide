@@ -1,4 +1,4 @@
-export let tphd = "undefined";
+export let _title = "undefined";
 
 export let result = "";
 
@@ -11,9 +11,9 @@ const obj = {
 setTitle(obj["articleTitle"]);
 
 function title() {
-  return tphd;
+  return _title;
 }
 
 function setTitle(arg) {
-  tphd = arg;
+  _title = arg;
 }

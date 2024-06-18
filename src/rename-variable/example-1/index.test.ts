@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { result, tphd } from ".";
+import { _title, result } from ".";
 
 describe("变量改名-范例", () => {
   it("读取", () => {
@@ -7,6 +7,6 @@ describe("变量改名-范例", () => {
   });
 
   it("更新", () => {
-    expect(tphd).toBe("test");
+    expect(_title).toBe("test");
   });
 });
