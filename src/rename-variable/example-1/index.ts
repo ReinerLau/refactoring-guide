@@ -2,10 +2,18 @@ export let tphd = "undefined";
 
 export let result = "";
 
-result += `<h1>${tphd}</h1>`;
+result += `<h1>${title()}</h1>`;
 
 const obj = {
   articleTitle: "test",
 };
 
-tphd = obj["articleTitle"];
+setTitle(obj["articleTitle"]);
+
+function title() {
+  return tphd;
+}
+
+function setTitle(arg) {
+  tphd = arg;
+}
