@@ -19,6 +19,9 @@ class NumberRange {
   get max() {
     return this._data.max;
   }
+  contains(arg) {
+    return arg >= this.min && arg <= this.max;
+  }
 }
 
 const station = {
@@ -33,9 +36,7 @@ const station = {
 };
 
 export function readingsOutsideRange(station: Station, range: NumberRange) {
-  return station.readings.filter(
-    (r) => r.temp < range.min || r.temp > range.max
-  );
+  return station.readings.filter((r) => !range.contains(r.temp));
 }
 
 const operatingPlan = {
