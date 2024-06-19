@@ -8,6 +8,19 @@ interface Station {
   readings: Reading[];
 }
 
+class NumberRange {
+  private _data: { min: number; max: number };
+  constructor(min: number, max: number) {
+    this._data = { min, max };
+  }
+  get min() {
+    return this._data.min;
+  }
+  get max() {
+    return this._data.max;
+  }
+}
+
 const station = {
   name: "ZB1",
   readings: [
@@ -22,7 +35,8 @@ const station = {
 export function readingsOutsideRange(
   station: Station,
   min: number,
-  max: number
+  max: number,
+  range: NumberRange | null
 ) {
   return station.readings.filter((r) => r.temp < min || r.temp > max);
 }
@@ -35,5 +49,6 @@ const operatingPlan = {
 export const alerts = readingsOutsideRange(
   station,
   operatingPlan.temperatureFloor,
-  operatingPlan.temperatureCeiling
+  operatingPlan.temperatureCeiling,
+  null
 );
