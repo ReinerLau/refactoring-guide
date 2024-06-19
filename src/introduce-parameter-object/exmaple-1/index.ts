@@ -32,12 +32,10 @@ const station = {
   ],
 };
 
-export function readingsOutsideRange(
-  station: Station,
-  min: number,
-  range: NumberRange
-) {
-  return station.readings.filter((r) => r.temp < min || r.temp > range.max);
+export function readingsOutsideRange(station: Station, range: NumberRange) {
+  return station.readings.filter(
+    (r) => r.temp < range.min || r.temp > range.max
+  );
 }
 
 const operatingPlan = {
@@ -50,8 +48,4 @@ const range = new NumberRange(
   operatingPlan.temperatureCeiling
 );
 
-export const alerts = readingsOutsideRange(
-  station,
-  operatingPlan.temperatureFloor,
-  range
-);
+export const alerts = readingsOutsideRange(station, range);
