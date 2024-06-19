@@ -46,9 +46,14 @@ const operatingPlan = {
   temperatureCeiling: 55,
 };
 
+const range = new NumberRange(
+  operatingPlan.temperatureFloor,
+  operatingPlan.temperatureCeiling
+);
+
 export const alerts = readingsOutsideRange(
   station,
   operatingPlan.temperatureFloor,
   operatingPlan.temperatureCeiling,
-  null
+  range
 );
