@@ -1,8 +1,9 @@
-import { acquireReading, baseRate } from ".";
+import { acquireReading, enrichReading } from ".";
 
-const aReading = acquireReading();
-const base = baseRate(aReading.month, aReading.year) * aReading.quantity;
-export const taxableCharge = Math.max(0, base - taxThreshold(aReading.year));
+const rawReading = acquireReading();
+const aReading = enrichReading(rawReading);
+const base = aReading.baseCharge;
+export const taxableCharge = Math.max(0, base! - taxThreshold(aReading.year));
 
 function taxThreshold(year: number) {
   return year;
