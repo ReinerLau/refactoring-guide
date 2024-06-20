@@ -1,6 +1,7 @@
 import { acquireReading, baseRate, Reading } from ".";
 
-const aReading = acquireReading();
+const rawReading = acquireReading();
+const aReading = new Reading(rawReading);
 export const basicChargeAmnout = calculateBaseCharge(aReading);
 
 function calculateBaseCharge(aReading: Reading) {

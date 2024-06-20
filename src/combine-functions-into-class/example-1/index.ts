@@ -1,11 +1,29 @@
-export interface Reading {
-  customer: string;
-  quantity: number;
-  month: number;
-  year: number;
+export class Reading {
+  private _customer: string;
+  private _quantity: number;
+  private _month: number;
+  private _year: number;
+  constructor(data) {
+    this._customer = data.customer;
+    this._quantity = data.quantity;
+    this._month = data.month;
+    this._year = data.year;
+  }
+  get customer() {
+    return this._customer;
+  }
+  get quantity() {
+    return this._quantity;
+  }
+  get month() {
+    return this._month;
+  }
+  get year() {
+    return this._year;
+  }
 }
 
-const reading: Reading = {
+const reading = {
   customer: "ivan",
   quantity: 10,
   month: 5,
