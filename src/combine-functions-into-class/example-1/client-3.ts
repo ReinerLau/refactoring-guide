@@ -1,9 +1,5 @@
-import { acquireReading, baseRate, Reading } from ".";
+import { acquireReading, Reading } from ".";
 
 const rawReading = acquireReading();
 const aReading = new Reading(rawReading);
-export const basicChargeAmnout = calculateBaseCharge(aReading);
-
-function calculateBaseCharge(aReading: Reading) {
-  return baseRate(aReading.month, aReading.year) * aReading.quantity;
-}
+export const basicChargeAmnout = aReading.calculateBaseCharge;
