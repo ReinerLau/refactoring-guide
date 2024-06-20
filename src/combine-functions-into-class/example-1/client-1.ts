@@ -1,5 +1,5 @@
-import { acquireReading, baseRate } from ".";
+import { acquireReading, Reading } from ".";
 
-const aReading = acquireReading();
-export const baseCharge =
-  baseRate(aReading.month, aReading.year) * aReading.quantity;
+const rawReading = acquireReading();
+const aReading = new Reading(rawReading);
+export const baseCharge = aReading.baseCharge;
