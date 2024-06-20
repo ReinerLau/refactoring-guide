@@ -4,6 +4,7 @@ export interface Reading {
   month: number;
   year: number;
   baseCharge?: number;
+  taxableCharge?: number;
 }
 
 const reading: Reading = {
@@ -24,8 +25,16 @@ export function baseRate(month: number, year: number) {
 export function enrichReading(original: Reading) {
   const result = Object.assign({}, original);
   result.baseCharge = calculateBaseCharge(result);
+  result.taxableCharge = Math.max(
+    0,
+    result.baseCharge! - taxThreshold(result.year)
+  );
   return result;
 }
 function calculateBaseCharge(aReading: Reading) {
   return baseRate(aReading.month, aReading.year) * aReading.quantity;
+}
+
+function taxThreshold(year: number) {
+  return year;
 }
