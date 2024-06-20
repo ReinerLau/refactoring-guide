@@ -1,6 +1,7 @@
-import { acquireReading, baseRate, Reading } from ".";
+import { acquireReading, baseRate, enrichReading, Reading } from ".";
 
-const aReading = acquireReading();
+const rawReading = acquireReading();
+const aReading = enrichReading(rawReading);
 export const basicChargeAmnout = calculateBaseCharge(aReading);
 
 function calculateBaseCharge(aReading: Reading) {

@@ -19,3 +19,8 @@ export function acquireReading() {
 export function baseRate(month: number, year: number) {
   return month + year;
 }
+
+export function enrichReading(original: Reading) {
+  const result = Object.assign({}, original);
+  return result;
+}
