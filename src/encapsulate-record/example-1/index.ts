@@ -6,6 +6,10 @@ class Organization {
   constructor(data) {
     this._data = data;
   }
+
+  set name(aString: string) {
+    this._data.name = aString;
+  }
 }
 
 export const organization = new Organization({
@@ -17,7 +21,7 @@ export let result = "";
 const newName = "test";
 
 result += `<h1>${getRawDataOfOrganization().name}</h1>`;
-getRawDataOfOrganization().name = newName;
+getOrganization().name = newName;
 
 export function getRawDataOfOrganization() {
   return organization._data;
