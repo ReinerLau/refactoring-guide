@@ -9,6 +9,10 @@ class CustomerData {
   get rawData() {
     return JSON.parse(JSON.stringify(this._data));
   }
+
+  usage(customerID, year, month) {
+    return this._data[customerID].usages[year][month];
+  }
 }
 
 export let customerData: any = new CustomerData({
@@ -44,9 +48,12 @@ export function compareUsage(
   laterYear: string,
   month: string
 ) {
-  const later = getRawDataOfCustomers()[customerID].usages[laterYear][month];
-  const earlier =
-    getRawDataOfCustomers()[customerID].usages[parseInt(laterYear) - 1][month];
+  const later = getCustomerData().usage(customerID, laterYear, month);
+  const earlier = getCustomerData().usage(
+    customerID,
+    parseInt(laterYear) - 1,
+    month
+  );
   return { laterAmount: later, change: later - earlier };
 }
 
