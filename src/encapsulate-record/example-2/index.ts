@@ -6,6 +6,9 @@ class CustomerData {
   setUsage(customerID, year, month, amount) {
     this._data[customerID].usages[year][month] = amount;
   }
+  get rawData() {
+    return JSON.parse(JSON.stringify(this._data));
+  }
 }
 
 export let customerData: any = new CustomerData({
@@ -51,7 +54,7 @@ function getCustomerData() {
   return customerData;
 }
 export function getRawDataOfCustomers() {
-  return customerData._data;
+  return customerData.rawData;
 }
 function setRawDataOfCustomers(arg) {
   customerData = new CustomerData(arg);
