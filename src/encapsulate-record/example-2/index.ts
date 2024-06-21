@@ -31,7 +31,11 @@ const year = "2016";
 const month = "2";
 const amount = 100;
 
-getRawDataOfCustomers()[customerID].usages[year][month] = amount;
+setUsage(customerID, year, month, amount);
+
+function setUsage(customerID, year, month, amount) {
+  getRawDataOfCustomers()[customerID].usages[year][month] = amount;
+}
 
 export function compareUsage(
   customerID: string,
