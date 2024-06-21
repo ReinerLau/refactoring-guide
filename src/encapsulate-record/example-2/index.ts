@@ -1,4 +1,4 @@
-export const customerData = {
+export let customerData = {
   "1920": {
     name: "martin",
     id: "1920",
@@ -24,15 +24,22 @@ const year = "2016";
 const month = "2";
 const amount = 100;
 
-customerData[customerID].usages[year][month] = amount;
+getRawDataOfCustomers()[customerID].usages[year][month] = amount;
 
 export function compareUsage(
   customerID: string,
   laterYear: string,
   month: string
 ) {
-  const later = customerData[customerID].usages[laterYear][month];
+  const later = getRawDataOfCustomers()[customerID].usages[laterYear][month];
   const earlier =
-    customerData[customerID].usages[parseInt(laterYear) - 1][month];
+    getRawDataOfCustomers()[customerID].usages[parseInt(laterYear) - 1][month];
   return { laterAmount: later, change: later - earlier };
+}
+
+function getRawDataOfCustomers() {
+  return customerData;
+}
+function setRawDataOfCustomers(arg) {
+  customerData = arg;
 }
