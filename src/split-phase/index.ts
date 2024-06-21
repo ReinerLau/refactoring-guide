@@ -20,11 +20,19 @@ export function priceOrder(
     Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
     product.discountRate;
-  const price = applyShipping(basePrice, shippingMethod, quantity, discount);
+  const priceData = {};
+  const price = applyShipping(
+    priceData,
+    basePrice,
+    shippingMethod,
+    quantity,
+    discount
+  );
   return price;
 }
 
 function applyShipping(
+  priceData: {},
   basePrice: number,
   shippingMethod: ShippingMethod,
   quantity: number,
