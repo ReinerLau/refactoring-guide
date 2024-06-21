@@ -22,24 +22,25 @@ export function priceOrder(
     product.discountRate;
   const priceData = {
     basePrice,
+    quantity,
   };
-  const price = applyShipping(priceData, shippingMethod, quantity, discount);
+  const price = applyShipping(priceData, shippingMethod, discount);
   return price;
 }
 
 function applyShipping(
   priceData: {
     basePrice: number;
+    quantity: number;
   },
   shippingMethod: ShippingMethod,
-  quantity: number,
   discount: number
 ) {
   const shippingPerCase =
     priceData.basePrice > shippingMethod.discountThreshold
       ? shippingMethod.discountedFee
       : shippingMethod.feePerCase;
-  const shippingCost = quantity * shippingPerCase;
+  const shippingCost = priceData.quantity * shippingPerCase;
   const price = priceData.basePrice - discount + shippingCost;
   return price;
 }
