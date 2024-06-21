@@ -16,8 +16,7 @@ export function priceOrder(
   shippingMethod: ShippingMethod
 ) {
   const priceData = calculatePricingData(product, quantity);
-  const price = applyShipping(priceData, shippingMethod);
-  return price;
+  return applyShipping(priceData, shippingMethod);
 }
 function calculatePricingData(product, quantity) {
   const basePrice = product.basePrice * quantity;
