@@ -3,6 +3,9 @@ class CustomerData {
   constructor(data) {
     this._data = data;
   }
+  setUsage(customerID, year, month, amount) {
+    this._data[customerID].usages[year][month] = amount;
+  }
 }
 
 export let customerData: any = new CustomerData({
@@ -31,11 +34,7 @@ const year = "2016";
 const month = "2";
 const amount = 100;
 
-setUsage(customerID, year, month, amount);
-
-function setUsage(customerID, year, month, amount) {
-  getRawDataOfCustomers()[customerID].usages[year][month] = amount;
-}
+getCustomerData().setUsage(customerID, year, month, amount);
 
 export function compareUsage(
   customerID: string,
