@@ -1,4 +1,11 @@
-export let customerData = {
+class CustomerData {
+  public _data;
+  constructor(data) {
+    this._data = data;
+  }
+}
+
+export let customerData: any = new CustomerData({
   "1920": {
     name: "martin",
     id: "1920",
@@ -17,7 +24,7 @@ export let customerData = {
     name: "neal",
     id: "38673",
   },
-};
+});
 
 const customerID = "1920";
 const year = "2016";
@@ -37,9 +44,12 @@ export function compareUsage(
   return { laterAmount: later, change: later - earlier };
 }
 
-function getRawDataOfCustomers() {
+function getCustomerData() {
   return customerData;
 }
+export function getRawDataOfCustomers() {
+  return customerData._data;
+}
 function setRawDataOfCustomers(arg) {
-  customerData = arg;
+  customerData = new CustomerData(arg);
 }

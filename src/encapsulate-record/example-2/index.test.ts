@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { compareUsage, customerData } from ".";
+import { compareUsage, getRawDataOfCustomers } from ".";
 
 describe("封装记录-封装嵌套记录", () => {
   it("读取", () => {
@@ -10,6 +10,6 @@ describe("封装记录-封装嵌套记录", () => {
     });
   });
   it("更新", () => {
-    expect(customerData["1920"].usages["2016"]["2"]).toBe(100);
+    expect(getRawDataOfCustomers()["1920"].usages["2016"]["2"]).toBe(100);
   });
 });
