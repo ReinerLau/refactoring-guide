@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getRawDataOfOrganization, result } from ".";
+import { getOrganization, result } from ".";
 
 describe("封装记录-范例", () => {
   it("读取", () => {
@@ -7,6 +7,6 @@ describe("封装记录-范例", () => {
   });
 
   it("更新", () => {
-    expect(getRawDataOfOrganization().name).toBe("test");
+    expect(getOrganization().name).toBe("test");
   });
 });

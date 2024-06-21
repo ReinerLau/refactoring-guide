@@ -7,6 +7,10 @@ class Organization {
     this._data = data;
   }
 
+  get name() {
+    return this._data.name;
+  }
+
   set name(aString: string) {
     this._data.name = aString;
   }
@@ -20,13 +24,9 @@ export const organization = new Organization({
 export let result = "";
 const newName = "test";
 
-result += `<h1>${getRawDataOfOrganization().name}</h1>`;
+result += `<h1>${getOrganization().name}</h1>`;
 getOrganization().name = newName;
 
-export function getRawDataOfOrganization() {
-  return organization._data;
-}
-
-function getOrganization() {
+export function getOrganization() {
   return organization;
 }
