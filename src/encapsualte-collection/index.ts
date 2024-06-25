@@ -14,6 +14,15 @@ class Person {
   set courses(aList) {
     this._courses = aList;
   }
+
+  addCourse(aCourse: Course) {
+    this._courses.push(aCourse);
+  }
+
+  removeCourse(aCourse: Course) {
+    const index = this._courses.indexOf(aCourse);
+    this._courses.splice(index, 1);
+  }
 }
 
 class Course {
@@ -38,7 +47,7 @@ function readBasicCourseNames() {
 const aPerson = new Person("Reiner");
 
 for (const name of readBasicCourseNames()) {
-  aPerson.courses.push(new Course(name, false));
+  aPerson.addCourse(new Course(name, false));
 }
 
 export const numAdvancedCourses = aPerson.courses.filter(
